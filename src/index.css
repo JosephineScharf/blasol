@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@import "@fontsource/poppins";
+@import "@fontsource/bowlby-one";
+
+:root {
+  --background: #E8F0F3;
+  --primary: #009AD5;
+  --secondary: #2F4195;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  font-family: "Poppins", sans-serif;
+  color: #2F4195;
+}

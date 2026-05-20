@@ -4,6 +4,7 @@ import banner1 from '../assets/tutorial/banner1.png'
 import banner2 from '../assets/tutorial/banner_2.png'
 import banner3 from '../assets/tutorial/banner3.png'
 import HomeImages from '../assets/tutorial/artists.png'
+import Modal from './Slides'
 
 
 const TARGET_DATE = new Date(2026, 5, 6, 0, 0, 0)

@@ -175,34 +175,62 @@ function Tutorial() {
        onClose={() => setShowModal(false)}
        title={modalSlide?.alt}
      >
-      {modalSlide &&
-        (modalStage === 1 ? (
-          <img
-            src={modalSlide.src}
-            alt={modalSlide.alt}
-            className="w-full h-auto object-contain cursor-pointer"
-            onClick={() => setModalStage(2)}
-          />
-        ) : (
-          <div className="w-full text-center">
-            <p className="mb-4 text-white/90">More about: {modalSlide.alt}</p>
-            <img src={modalSlide.src} alt={modalSlide.alt} className="w-full h-auto object-contain mb-4" />
-            <div className="flex justify-center gap-3">
-              <button
-                onClick={() => setModalStage(1)}
-                className="bg-white text-[#2F4195] px-4 py-2 rounded"
-              >
-                Back
-              </button>
-              <button
-                onClick={() => setShowModal(false)}
-                className="bg-[#07B1E0] text-white px-4 py-2 rounded"
-              >
-                Close
-              </button>
+       {modalSlide &&
+          (modalStage === 1 ? (
+            <div className="w-full">
+              <div className="flex flex-col items-center text-center px-2">
+                <div className="inline-block transform -skew-x-6 bg-[#07B1E0] px-4 py-2 -mt-2">
+                  <h1 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-wide text-white" style={{fontFamily: '"Bowlby One", sans-serif'}}>
+                    GET TO KNOW
+                  </h1>
+                </div>
+
+                <div className="inline-block transform -skew-x-6 bg-[#07B1E0] px-4 py-2 mt-2">
+                  <h1 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-wide text-white" style={{fontFamily: '"Bowlby One", sans-serif'}}>
+                    YOURSELF!
+                  </h1>
+                </div>
+
+                <h2 className="mt-6 mb-3 text-center text-lg sm:text-2xl font-extrabold uppercase text-white">
+                  GET TO KNOW YOU, WHILE KNOWING US!
+                </h2>
+
+                <p className="max-w-[320px] text-white/90 mb-6">
+                  Try our music quiz now and determine <strong>what's your vibe</strong> & who is your crowd!
+                </p>
+
+                <button
+                  onClick={() => setModalStage(2)}
+                  className="bg-[#07B1E0] text-white px-6 py-3 rounded shadow-md font-extrabold uppercase"
+                >
+                  CONTINUE
+                </button>
+              </div>
+              <div className="mt-6">
+                {/* decorative bottom area: show a cropped version of the slide image for visual continuity */}
+                <img src={modalSlide.src} alt="decor" className="w-full h-28 object-cover mt-4 rounded-b-md" />
+              </div>
             </div>
-          </div>
-        ))}
+          ) : (
+            <div className="w-full text-center">
+              <p className="mb-4 text-white/90">More about: {modalSlide.alt}</p>
+              <img src={modalSlide.src} alt={modalSlide.alt} className="w-full h-auto object-contain mb-4" />
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() => setModalStage(1)}
+                  className="bg-white text-[#2F4195] px-4 py-2 rounded"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="bg-[#07B1E0] text-white px-4 py-2 rounded"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          ))}
      </Modal>
    </main>
   

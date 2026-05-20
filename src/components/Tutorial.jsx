@@ -167,6 +167,7 @@ function Tutorial() {
   return (
     <main className="flex flex-1 items-start justify-center px-4 pt-3 pb-10 sm:pt-4 sm:pb-12 bg-[#E8F0F3] min-h-screen">
       <section className="flex w-full max-w-[410px] flex-col items-center">
+        <br></br>
         <br />
 
         <div

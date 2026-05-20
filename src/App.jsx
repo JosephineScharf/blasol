@@ -24,7 +24,7 @@ const navItems = [
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#f3f7ff] pb-32">
+      <div className="min-h-screen bg-[#E7F0F3] pb-32">
         <Header />
 
         <nav className="mx-auto mt-4 flex w-full max-w-[430px] flex-wrap justify-center gap-2 px-4">

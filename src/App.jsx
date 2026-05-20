@@ -9,6 +9,9 @@ import Solspot from './components/Solspot'
 import Quiz from './components/Quiz'
 import Personality from './components/Personality'
 import Menu from './components/Menu'
+import Quiz2 from './components/Quiz2';
+import Quiz3 from './components/Quiz3';
+
 
 
 const navItems = [
@@ -49,6 +52,8 @@ export default function App() {
             <Route path="/personality" element={<Personality />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/quiz2" element={<Quiz2 />} />
+            <Route path="/quiz3" element={<Quiz3 />} />
           </Routes>
         </div>
 

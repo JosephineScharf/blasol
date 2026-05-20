@@ -76,15 +76,16 @@ return (
                 </section>
 
                 <section className="w-full flex flex-row items-center justify-center gap-32">
-                    <Link to="/quiz2" className="flex items-center">
+                    <Link to="/Personality" className="flex items-center">
                         <img
                             src={quizx}
                             alt="Dislike"
                             className="w-30 sm:w-28 h-auto"
+                            
                         />
                     </Link>
 
-                    <Link to="/quiz2" className="flex items-center">
+                    <Link to="/Personality" className="flex items-center">
                         <img
                             src={quizy}
                             alt="Like"

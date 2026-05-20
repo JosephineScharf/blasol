@@ -34,7 +34,7 @@ export default function App() {
           {navItems.map((item) => (
             <Link
               key={item.to}
-              className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#2F4195] hover:bg-[#e8f2ff]"
+              className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#F3F7FF]"
               to={item.to}
             >
               {item.label}

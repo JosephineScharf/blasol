@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import banner1 from '../assets/tutorial/banner1.png'
 import banner2 from '../assets/tutorial/2banner.png'
 import banner3 from '../assets/tutorial/banner3.png'
@@ -18,10 +19,10 @@ const carouselSlides = [
 ]
 
 const tutorialSlides = [
-  { image: slide1 },
-  { image: slide2 },
-  { image: slide3 },
-  { image: slide4 },
+  { image: slide1, continueButtonClass: 'translate-y-[-140px]' },
+  { image: slide2, continueButtonClass: 'translate-y-[-10px]' },
+  { image: slide3, continueButtonClass: 'translate-y-[-10px]' },
+  { image: slide4, continueButtonClass: 'translate-y-[-110px]' },
 ]
 
 function getCountdown() {
@@ -55,6 +56,7 @@ function CountdownValue({ value, label }) {
 function TutorialModal({ show, onClose }) {
   const [step, setStep] = useState(0)
   const total = tutorialSlides.length
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (show) setStep(0)
@@ -65,6 +67,7 @@ function TutorialModal({ show, onClose }) {
   const slide = tutorialSlides[step]
   const isFirst = step === 0
   const isLast = step === total - 1
+  const continueButtonClass = slide.continueButtonClass ?? ''
 
   return (
     <div className="fixed inset-0 z-50 bg-black/45" onClick={onClose}>
@@ -85,25 +88,24 @@ function TutorialModal({ show, onClose }) {
           />
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#0D2B6E] via-[#0D2B6E]/95 to-transparent px-5 pb-6 pt-10 sm:px-8 sm:pb-8">
-          <div className="flex justify-center gap-2">
+        <div className="absolute bottom-50 left-0 right-0 z-10 bg-[transparent] px-5 pb-6 pt-10 sm:px-8 sm:pb-8">
+          <div className="flex justify-center gap-0">
             {tutorialSlides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setStep(i)}
                 aria-label={`Go to slide ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === step ? 'w-8 bg-[#07B1E0]' : 'w-2 bg-white/30'
+                  i === step ? 'bg-[transparent]' : 'w-2 bg-white/0'
                 }`}
               />
             ))}
           </div>
 
-          <div className="mt-5 flex items-center justify-between gap-4">
-            {!isFirst ? (
+            <div className="mt-[-160px] flex items-center justify-center gap-4">            {!isFirst ? (
               <button
                 onClick={() => setStep((s) => s - 1)}
-                className="rounded-lg border border-white/30 px-5 py-2 text-sm font-bold uppercase text-white hover:bg-white/10 transition"
+                className="rounded-lg border border-transparent px-5 py-2 text-sm font-bold uppercase text-white"
               >
                 Back
               </button>
@@ -111,19 +113,28 @@ function TutorialModal({ show, onClose }) {
               <div />
             )}
 
-            {isLast ? (
-              <button onClick={onClose} aria-label="Let's Go" className="transition hover:opacity-90">
-                <img src={continueButton} alt="Let's Go" className="h-12 w-auto select-none" />
-              </button>
-            ) : (
-              <button
-                onClick={() => setStep((s) => s + 1)}
-                aria-label="Continue"
-                className="transition hover:opacity-90"
-              >
-                <img src={continueButton} alt="Continue" className="h-12 w-auto select-none" />
-              </button>
-            )}
+            <div className={continueButtonClass}>
+              {isLast ? (
+                <button
+                  onClick={() => {
+                    onClose()
+                    navigate('/quiz')
+                  }}
+                  aria-label="Let's Go"
+                  className="transition hover:opacity-90"
+                >
+                  <img src={continueButton} alt="Let's Go" className="h-12 w-auto select-none" />
+                </button>
+              ) : (
+                <button
+                  onClick={() => setStep((s) => s + 1)}
+                  aria-label="Continue"
+                  className="transition hover:opacity-90"
+                >
+                  <img src={continueButton} alt="Continue" className="h-12 w-auto select-none" />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

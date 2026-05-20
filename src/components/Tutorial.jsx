@@ -68,6 +68,7 @@ function Tutorial() {
  const [countdown, setCountdown] = useState(getCountdown)
  const [showModal, setShowModal] = useState(false)
  const [modalSlide, setModalSlide] = useState(null)
+ const [modalStage, setModalStage] = useState(1)
 
 
  useEffect(() => {
@@ -135,6 +136,7 @@ function Tutorial() {
                alt={slide.alt}
                onClick={() => {
                  setModalSlide(slide)
+                 setModalStage(1)
                  setShowModal(true)
                }}
                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out cursor-pointer ${
@@ -173,13 +175,34 @@ function Tutorial() {
        onClose={() => setShowModal(false)}
        title={modalSlide?.alt}
      >
-       {modalSlide && (
-         <img
-           src={modalSlide.src}
-           alt={modalSlide.alt}
-           className="w-full h-auto object-contain"
-         />
-       )}
+      {modalSlide &&
+        (modalStage === 1 ? (
+          <img
+            src={modalSlide.src}
+            alt={modalSlide.alt}
+            className="w-full h-auto object-contain cursor-pointer"
+            onClick={() => setModalStage(2)}
+          />
+        ) : (
+          <div className="w-full text-center">
+            <p className="mb-4 text-white/90">More about: {modalSlide.alt}</p>
+            <img src={modalSlide.src} alt={modalSlide.alt} className="w-full h-auto object-contain mb-4" />
+            <div className="flex justify-center gap-3">
+              <button
+                onClick={() => setModalStage(1)}
+                className="bg-white text-[#2F4195] px-4 py-2 rounded"
+              >
+                Back
+              </button>
+              <button
+                onClick={() => setShowModal(false)}
+                className="bg-[#07B1E0] text-white px-4 py-2 rounded"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        ))}
      </Modal>
    </main>
   

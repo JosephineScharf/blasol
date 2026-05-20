@@ -7,13 +7,14 @@ import attributes from '../assets/personality/attributes.png';
 
 export default function Personality() {
     return (
-        <main className=" flex flex-col justify-center items-center">
-            <section className="mx-auto w-full max-w-[470px] py-10 text-center shadow-[0_14px_34px_rgba(47,65,149,0.12)]">
+        <main className="flex flex-col justify-center items-center mx-auto w-full max-w-[470px] text-center gap-8">
+            <section>
                    <h1
                     style={{ fontFamily: '"Bowlby One", sans-serif' }}
                     className=" text-3xl font-black uppercase tracking-[0.08em] text-[#2F4195]">
                     Your music taste
                    </h1>
+                   </section>
                 <section className="w-11/12 max-w-[470px] relative mt-6 grid justify-center">
                   <img
                     src={personalityText}
@@ -82,7 +83,7 @@ export default function Personality() {
 
 
 
-            </section>
+        
         </main>
     )
 }

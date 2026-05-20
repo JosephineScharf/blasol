@@ -27,7 +27,7 @@ const navItems = [
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#E8F0F3] pb-32">
+      <div className="min-h-screen bg-[#E8F0F3] pb-32 pt-20">
         <Header />
 
         <nav className="mx-auto mt-4 flex w-full max-w-[430px] flex-wrap justify-center gap-2 px-4">
@@ -35,6 +35,7 @@ export default function App() {
             <Link
               key={item.to}
               className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#2F4195] hover:bg-[#E8F0F3]"
+              className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#E8F0F3]"
               to={item.to}
             >
               {item.label}

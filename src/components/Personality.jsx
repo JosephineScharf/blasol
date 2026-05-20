@@ -5,7 +5,7 @@ export default function Personality() {
     return (
         <div>
             <Header />
-            <h1>Personality</h1>
+            <h1>Personality hey</h1>
             <Footer />
         </div>
     )

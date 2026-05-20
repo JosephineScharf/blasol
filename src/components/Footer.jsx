@@ -7,7 +7,7 @@ import menuIcon from '../assets/footer/menu.svg'
 
 function Footer() {
   return (
-    <footer className="fixed bottom-0 left-1/2 w-full max-w-[430px] -translate-x-1/2">
+    <footer className="absolute fixed flex bottom-0 w-full h-full relative">
 
       <img
         src={footerBg}

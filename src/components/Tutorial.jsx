@@ -54,4 +54,180 @@ function CountdownValue({ value, label }) {
 
 function TutorialModal({ show, onClose }) {
   const [step, setStep] = useState(0)
+  const total = tutorialSlides.length
+
+  useEffect(() => {
+    if (show) setStep(0)
+  }, [show])
+
+  if (!show) return null
+
+  const slide = tutorialSlides[step]
+  const isFirst = step === 0
+  const isLast = step === total - 1
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/45" onClick={onClose}>
+      <div className="relative flex h-full w-full flex-col" onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          aria-label="Close tutorial"
+          className="absolute left-6 top-60 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-transparent text-3xl font-light text-white"
+        >
+          ✕
+        </button>
+
+        <div className="flex flex-1 items-center justify-center px-4 pt-16 pb-32 sm:px-8 sm:pt-20 sm:pb-36">
+          <img
+            src={slide.image}
+            alt={slide.title || `Tutorial slide ${step + 1}`}
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#0D2B6E] via-[#0D2B6E]/95 to-transparent px-5 pb-6 pt-10 sm:px-8 sm:pb-8">
+          <div className="flex justify-center gap-2">
+            {tutorialSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setStep(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === step ? 'w-8 bg-[#07B1E0]' : 'w-2 bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="mt-5 flex items-center justify-between gap-4">
+            {!isFirst ? (
+              <button
+                onClick={() => setStep((s) => s - 1)}
+                className="rounded-lg border border-white/30 px-5 py-2 text-sm font-bold uppercase text-white hover:bg-white/10 transition"
+              >
+                Back
+              </button>
+            ) : (
+              <div />
+            )}
+
+            {isLast ? (
+              <button onClick={onClose} aria-label="Let's Go" className="transition hover:opacity-90">
+                <img src={continueButton} alt="Let's Go" className="h-12 w-auto select-none" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setStep((s) => s + 1)}
+                aria-label="Continue"
+                className="transition hover:opacity-90"
+              >
+                <img src={continueButton} alt="Continue" className="h-12 w-auto select-none" />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
+
+function Tutorial() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [countdown, setCountdown] = useState(getCountdown)
+  const [showTutorial, setShowTutorial] = useState(false)
+
+  useEffect(() => {
+    const carouselTimer = window.setInterval(() => {
+      setActiveSlide((s) => (s + 1) % carouselSlides.length)
+    }, 3000)
+
+    const countdownTimer = window.setInterval(() => {
+      setCountdown(getCountdown())
+    }, 1000)
+
+    setCountdown(getCountdown())
+
+    return () => {
+      window.clearInterval(carouselTimer)
+      window.clearInterval(countdownTimer)
+    }
+  }, [])
+
+  return (
+    <main className="flex flex-1 items-start justify-center px-4 pt-3 pb-10 sm:pt-4 sm:pb-12">
+      <section className="flex w-full max-w-[410px] flex-col items-center">
+        <br />
+
+        <div
+          className="mb-10 bg-[#C7E4F1] px-4 pb-6 pt-[50px] shadow-[0_12px_28px_rgba(13,46,134,0.08)]"
+          style={{
+            clipPath:
+              'polygon(3% 6%, 18% 1%, 38% 4%, 65% 8%, 80% 4%, 95% 10%, 97% 67%, 96% 95%, 75% 100%, 32% 92%, 22% 96%, 12% 98%, 3% 96%, 1% 50%, 4% 25%)',
+          }}
+        >
+          <br />
+          <h1
+            className="mb-5 text-center text-[1.45rem] font-black uppercase tracking-[0.06em] text-[#1F4BA6] sm:text-[3rem]"
+            style={{ fontFamily: '"Bowlby One", sans-serif' }}
+          >
+            Blå Sol 2026
+          </h1>
+
+          <div className="grid grid-cols-6 gap-x-10 gap-y-4 sm:gap-x-4">
+            <br />
+            <CountdownValue value={countdown.days} label="Days" />
+            <CountdownValue value={countdown.hours} label="Hours" />
+            <CountdownValue value={countdown.minutes} label="Minutes" />
+            <CountdownValue value={countdown.seconds} label="Seconds" />
+            <br />
+          </div>
+          <br />
+        </div>
+
+        <div className="relative w-full max-w-[410px] pt-[50px]">
+          <br />
+          <div className="relative aspect-[16/10] w-full overflow-hidden bg-transparent">
+            {carouselSlides.map((slide, i) => (
+              <img
+                key={slide.src}
+                src={slide.src}
+                alt={slide.alt}
+                onClick={() => setShowTutorial(true)}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out cursor-pointer ${
+                  i === activeSlide ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {carouselSlides.map((slide, i) => (
+              <button
+                key={slide.src}
+                type="button"
+                onClick={() => setActiveSlide(i)}
+                aria-label={`Show slide ${i + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  i === activeSlide ? 'w-8 bg-[#1F4BA6]' : 'w-2.5 bg-[#9cb9e8]'
+                }`}
+              />
+            ))}
+          </div>
+          <br />
+        </div>
+
+        <div className="mt-10 w-full flex justify-center pt-[50px]">
+          <img
+            src={HomeImages}
+            alt="Artists lineup"
+            className="w-full max-w-[430px] object-contain"
+          />
+        </div>
+      </section>
+
+      <TutorialModal show={showTutorial} onClose={() => setShowTutorial(false)} />
+    </main>
+  )
+}
+
+export default Tutorial

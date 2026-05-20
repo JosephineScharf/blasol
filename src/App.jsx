@@ -16,7 +16,6 @@ import Quiz3 from './components/Quiz3';
 
 const navItems = [
   { to: '/', label: 'Home' },
-  { to: '/tutorial', label: 'Tutorial' },
   { to: '/lineup', label: 'Lineup' },
   { to: '/solspot', label: 'Solspot' },
   { to: '/quiz', label: 'Quiz' },
@@ -34,7 +33,7 @@ export default function App() {
           {navItems.map((item) => (
             <Link
               key={item.to}
-              className="rounded-full bg-white px-3 py-2 text-sm font-semibold text-[#2F4195] shadow-sm transition hover:bg-[#e8f2ff]"
+              className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#2F4195] hover:bg-[#e8f2ff]"
               to={item.to}
             >
               {item.label}
@@ -44,8 +43,7 @@ export default function App() {
 
         <div className="mx-auto w-full max-w-[430px] px-0">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tutorial" element={<Tutorial />} />
+            <Route path="/" element={<Tutorial />} />
             <Route path="/lineup" element={<Lineup />} />
             <Route path="/solspot" element={<Solspot />} />
             <Route path="/quiz" element={<Quiz />} />

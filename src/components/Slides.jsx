@@ -1,4 +1,5 @@
 import React from 'react'
+import continueButton from '../assets/tutorial/continue.png'
 
 
 export default function Modal({ show, onClose, title, children, onContinue }) {
@@ -58,9 +59,9 @@ export default function Modal({ show, onClose, title, children, onContinue }) {
               if (onContinue) onContinue()
               else onClose()
             }}
-            className="bg-[#07B1E0] px-6 py-3 rounded-md text-white font-extrabold uppercase shadow-md text-lg"
+            className="transition hover:opacity-90"
           >
-            Continue
+            <img src={continueButton} alt="Continue" className="h-12 w-auto select-none" />
           </button>
         </div>
       </div>

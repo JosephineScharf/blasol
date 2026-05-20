@@ -13,6 +13,7 @@ import Menu from './components/Menu'
 
 const navItems = [
   { to: '/', label: 'Home' },
+  { to: '/tutorial', label: 'Tutorial' },
   { to: '/lineup', label: 'Lineup' },
   { to: '/solspot', label: 'Solspot' },
   { to: '/quiz', label: 'Quiz' },
@@ -40,7 +41,8 @@ export default function App() {
 
         <div className="mx-auto w-full max-w-[430px] px-0">
           <Routes>
-            <Route path="/" element={<Tutorial />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/lineup" element={<Lineup />} />
             <Route path="/solspot" element={<Solspot />} />
             <Route path="/quiz" element={<Quiz />} />

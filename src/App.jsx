@@ -1,64 +1,59 @@
 import './App.css'
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Home from './components/Home'
+import Tutorial from './components/Tutorial'
+import Lineup from './components/Lineup'
+import Solspot from './components/Solspot'
 import Quiz from './components/Quiz'
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Personality from './components/Personality'
+import Menu from './components/Menu'
 
-function Banner() {
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold">THIS IS GONNA BE A BANNER</h1>
-    </div>
-  );
-}
 
-function Quiz() {
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold">Quiz</h1>
-      <p className="mt-2 text-gray-600">This is the quiz section.</p>
-    </div>
-  );
-}
-
-function Contact() {
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold">Contact Page</h1>
-      <p className="mt-2 text-gray-600">Get in touch with us.</p>
-    </div>
-  );
-}
+const navItems = [
+  { to: '/', label: 'Home' },
+  { to: '/tutorial', label: 'Tutorial' },
+  { to: '/lineup', label: 'Lineup' },
+  { to: '/solspot', label: 'Solspot' },
+  { to: '/quiz', label: 'Quiz' },
+  { to: '/personality', label: 'Personality' },
+  { to: '/menu', label: 'Menu' },
+]
 
 export default function App() {
   return (
-    <>
-      <Header />
-      <BrowserRouter>
-        <div className="min-h-screen bg-gray-100">
-          <nav className="flex gap-4 p-4 bg-white shadow">
-            <Link className="text-blue-600 hover:underline" to="/">
-              Home
-          </Link>
-          <Link className="text-blue-600 hover:underline" to="/quiz">
-            Quiz
-          </Link>
-          <Link className="text-blue-600 hover:underline" to="/contact">
-            Contact
-          </Link>
+    <BrowserRouter>
+      <div className="min-h-screen bg-[#f3f7ff] pb-32">
+        <Header />
+
+        <nav className="mx-auto mt-4 flex w-full max-w-[430px] flex-wrap justify-center gap-2 px-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              className="rounded-full bg-white px-3 py-2 text-sm font-semibold text-[#2F4195] shadow-sm transition hover:bg-[#e8f2ff]"
+              to={item.to}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        <Routes>
-          <Route path="/" element={<Banner />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <div className="mx-auto w-full max-w-[430px] px-0">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tutorial" element={<Tutorial />} />
+            <Route path="/lineup" element={<Lineup />} />
+            <Route path="/solspot" element={<Solspot />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/personality" element={<Personality />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+
+        <Footer />
       </div>
     </BrowserRouter>
-
-    <Footer />
-    </>
-
-    
   );
 }

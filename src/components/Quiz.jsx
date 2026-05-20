@@ -1,7 +1,6 @@
 
 import quizx from '../assets/quiz/quizx.png';
 import quizy from '../assets/quiz/quizy.png';
-import Footer from './Footer';
 import artist from '../assets/quiz/artistpic.png';
 import videoSrc from '../assets/quiz/test5.webm';
 import backpattern from '../assets/quiz/back-pattern.png';
@@ -85,9 +84,6 @@ return (
                 </section>
             </main>
 
-            <footer className='w-full mt-6 flex justify-center fixed bottom-0'>
-                <Footer />
-            </footer>
         </div>
     </div>
 )

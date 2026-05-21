@@ -63,8 +63,7 @@ return (
                             autoPlay
                             loop
                             playsInline
-                            muted
-                            controls
+                          
                         />
                         <img
                             src={artist}

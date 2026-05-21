@@ -6,6 +6,7 @@ import videoSrc from '../assets/quiz/test5.webm';
 import backpattern from '../assets/quiz/back-pattern.png';
 import { Link } from 'react-router-dom';
 import artist3 from '../assets/quiz/artist3.png';
+import videoSrc3 from '../assets/quiz/benja.webm';
 
 function Quiz() {
 return (
@@ -48,7 +49,7 @@ return (
 
                 </div>
                     <h2 style={{ fontFamily: '"Bowlby One", sans-serif' }}
-                    className="artist-name text-4xl mt-4 justify-center align-middle">SAVEUS</h2>
+                    className="artist-name text-4xl mt-4 justify-center align-middle">BENJAMIN HAV</h2>
                 </section>
 
                 <br />
@@ -59,13 +60,12 @@ return (
                     <div className="relative w-full h-[320px] sm:h-[380px]">
                         <video
                             className="absolute inset-0 w-80 h-full object-cover z-0 "
-                            src={videoSrc}
+                            src={videoSrc3}
                             type="video/webm"
                             autoPlay
                             loop
                             playsInline
-                            muted
-                            controls
+                            
                         />
                         <img
                             src={artist3}

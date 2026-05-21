@@ -19,10 +19,30 @@ const carouselSlides = [
 ]
 
 const tutorialSlides = [
-  { image: slide1, continueButtonClass: 'translate-y-[-140px]' },
-  { image: slide2, continueButtonClass: 'translate-y-[-10px]' },
-  { image: slide3, continueButtonClass: 'translate-y-[-10px]' },
-  { image: slide4, continueButtonClass: 'translate-y-[-110px]' },
+  {
+    image: slide1,
+    continueButtonClass: 'translate-y-[-140px]',
+    showContinue: true,
+    showArrow: false,
+  },
+  {
+    image: slide2,
+    continueButtonClass: 'translate-y-[-140px]',
+    showContinue: false,
+    showArrow: true,
+  },
+  {
+    image: slide3,
+    continueButtonClass: 'translate-y-[-140px]',
+    showContinue: false,
+    showArrow: true,
+  },
+  {
+    image: slide4,
+    continueButtonClass: 'translate-y-[-140px]',
+    showContinue: true,
+    showArrow: false,
+  },
 ]
 
 function getCountdown() {
@@ -65,8 +85,10 @@ function TutorialModal({ show, onClose }) {
   if (!show) return null
 
   const slide = tutorialSlides[step]
-  const isFirst = step === 0
-  const isLast = step === total - 1
+    const isFirst = step === 0
+    const isLast = step === total - 1
+    const showArrow = slide.showArrow ?? true
+    const showContinue = slide.showContinue ?? false
   const continueButtonClass = slide.continueButtonClass ?? ''
 
   return (
@@ -89,53 +111,154 @@ function TutorialModal({ show, onClose }) {
         </div>
 
         <div className="absolute bottom-50 left-0 right-0 z-10 bg-[transparent] px-5 pb-6 pt-10 sm:px-8 sm:pb-8">
-          <div className="flex justify-center gap-0">
+          <div className="justify-center gap-0">
             {tutorialSlides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setStep(i)}
                 aria-label={`Go to slide ${i + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === step ? 'bg-[transparent]' : 'w-2 bg-white/0'
+                  i === step ? 'bg-[transparent]' : 'w-2 bg-transparent'
                 }`}
               />
             ))}
           </div>
 
-            <div className="mt-[-160px] flex items-center justify-center gap-4">            {!isFirst ? (
-              <button
-                onClick={() => setStep((s) => s - 1)}
-                className="rounded-lg border border-transparent px-5 py-2 text-sm font-bold uppercase text-white"
-              >
-                Back
-              </button>
-            ) : (
-              <div />
-            )}
+            <div className={`mt-[-140px] w-full ${continueButtonClass}`}>
+              <div className="grid grid-cols-3 items-center px-4">
+                <div className="flex justify-start">
+                  {!isFirst ? (
+                    <button
+                      onClick={() => setStep((s) => s - 1)}
+                      className="absolute translate-y-[80px] translate-x-[50px] h-12 justify-center rounded-lg px-4 text-sm font-bold uppercase text-white"
+                    >
+                      Back
+                    </button>
+                  ) : (
+                    <div />
+                  )}
+                </div>
 
-            <div className={continueButtonClass}>
-              {isLast ? (
-                <button
-                  onClick={() => {
-                    onClose()
-                    navigate('/quiz')
-                  }}
-                  aria-label="Let's Go"
-                  className="transition hover:opacity-90"
-                >
-                  <img src={continueButton} alt="Let's Go" className="h-12 w-auto select-none" />
-                </button>
-              ) : (
-                <button
-                  onClick={() => setStep((s) => s + 1)}
-                  aria-label="Continue"
-                  className="transition hover:opacity-90"
-                >
-                  <img src={continueButton} alt="Continue" className="h-12 w-auto select-none" />
-                </button>
-              )}
+                <div className="flex justify-end items-center">
+                  {/* Right column: either image continue + arrow, or only arrow when showContinue is false */}
+                  {showContinue ? (
+                    <div className="flex items-center justify-end gap-0">
+                      {isLast ? (
+                        <button
+                          onClick={() => {
+                            onClose()
+                            navigate('/quiz')
+                          }}
+                          aria-label="Go to quiz"
+                        >
+                          <img src={continueButton} alt="Go to quiz" className="h-12 w-auto select-none" />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setStep((s) => s + 1)}
+                          aria-label="Continue"
+                          className="transition hover:opacity-90"
+                        >
+                          <img src={continueButton} alt="Continue" className="h-12 w-auto select-none" />
+                        </button>
+                      )}
+
+                      {showArrow && (isLast ? (
+                        <button
+                          onClick={() => {
+                            onClose()
+                            navigate('/quiz')
+                          }}
+                          aria-label="Go to quiz (arrow)"
+                          className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:opacity-90"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-7 w-7"
+                          >
+                            <path d="M8 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setStep((s) => s + 1)}
+                          aria-label="Continue (arrow)"
+                            className="absolute translate-y-[100px] translate-x-[100px] h-12 w-12 items-center justify-center rounded-full bg-white/0 text-white"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-7 w-7"
+                          >
+                            <path d="M8 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    showArrow ? (
+                      <div className="flex items-center justify-end">
+                        {isLast ? (
+                          <button
+                            onClick={() => {
+                              onClose()
+                              navigate('/quiz')
+                            }}  
+                            aria-label="Go to quiz (arrow)"
+                            className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:opacity-90"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="h-7 w-7"
+                            >
+                              <path d="M8 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => setStep((s) => s + 1)}
+                            aria-label="Continue (arrow)"
+                            className="absolute translate-y-[105px] translate-x-[100px] h-12 w-12 items-center justify-center rounded-full bg-white/0 text-white"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="h-7 w-7"
+                            >
+                              <path d="M8 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <div />
+                    )
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
         </div>
       </div>
     </div>

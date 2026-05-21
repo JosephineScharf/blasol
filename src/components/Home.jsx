@@ -12,7 +12,7 @@ const links = [
 export default function Home() {
 	return (
 		<main className="flex justify-center px-4 py-8">
-			<section className="w-full rounded-[2rem] bg-white px-5 py-8 shadow-[0_14px_34px_rgba(47,65,149,0.12)]">
+			<section className="w-full bg-#E8F0F3 px-5 py-8">
 				<h1 className="text-center text-3xl font-black uppercase tracking-[0.08em] text-[#2F4195]">
 					Blå Sol
 				</h1>

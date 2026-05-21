@@ -34,8 +34,8 @@ export default function App() {
           {navItems.map((item) => (
             <Link
               key={item.to}
-              className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#2F4195] hover:bg-[#E8F0F3]"
-              className="rounded-full bg-transparent px-3 py-2 text-sm font-semibold text-[#E8F0F3]"
+              className="rounded-full bg-#E8F0F3 px-3 py-2 text-sm font-semibold text-[#2F4195]"
+              className="rounded-full bg-#E8F0F3 px-3 py-2 text-sm font-semibold text-[#E8F0F3]"
               to={item.to}
             >
               {item.label}
@@ -45,7 +45,7 @@ export default function App() {
 
         <div className="mx-auto w-full max-w-[430px] px-0">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Tutorial />} />
             <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/lineup" element={<Lineup />} />
             <Route path="/solspot" element={<Solspot />} />

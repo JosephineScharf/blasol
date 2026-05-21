@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './components/Home'
@@ -26,7 +26,7 @@ const navItems = [
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen bg-[#E8F0F3] pb-32 pt-20">
         <Header />
 
@@ -35,7 +35,6 @@ export default function App() {
             <Link
               key={item.to}
               className="rounded-full bg-#E8F0F3 px-3 py-2 text-sm font-semibold text-[#2F4195]"
-              className="rounded-full bg-#E8F0F3 px-3 py-2 text-sm font-semibold text-[#E8F0F3]"
               to={item.to}
             >
               {item.label}
@@ -60,6 +59,6 @@ export default function App() {
 
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

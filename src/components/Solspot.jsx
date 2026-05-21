@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 import Footer from '../components/Footer'
 
@@ -19,6 +20,7 @@ export default function Solspot() {
 	const [openOverlay, setOpenOverlay] = useState(null)
 	const [joinedParty, setJoinedParty] = useState(false)
 	const [joinedDisco, setJoinedDisco] = useState(false)
+	const navigate = useNavigate()
 
 	const closeOverlay = () => {
 		setOpenOverlay(null)
@@ -26,9 +28,17 @@ export default function Solspot() {
 		setJoinedDisco(false)
 	}
 
-	return (
-		<div className="relative h-screen overflow-hidden bg-[#E8F0F3]">
+	useEffect(() => {
+	document.body.style.overflow = 'hidden'
 
+	return () => {
+		document.body.style.overflow = ''
+	}
+}, [])
+
+	return (
+		<div className="relative h-[100dvh] overflow-hidden bg-[#E8F0F3">
+			
 			{/* title */}
 			<div className="absolute left-[58%] top-[20px] z-20 w-[350px] -translate-x-1/2">
 
